@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agniva Banerjee — Software Engineer</title>
+  <meta name="description" content="Portfolio of Agniva Banerjee — full-stack and backend engineer specializing in databases, distributed systems, and developer tooling." />
+  <meta property="og:title" content="Agniva Banerjee — Software Engineer" />
+  <meta property="og:description" content="Full-stack & backend engineer at Wells Fargo. BITS Pilani graduate." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ───── NAVBAR ───── -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#home" class="nav-logo">AB<span class="accent-dot">.</span></a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about"      class="nav-link">About</a></li>
+        <li><a href="#experience" class="nav-link">Experience</a></li>
+        <li><a href="#skills"     class="nav-link">Skills</a></li>
+        <li><a href="#contact"    class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <button class="theme-toggle" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">
+          <!-- Sun -->
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+          <!-- Moon -->
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+        <a href="agniva_wells.pdf" download class="btn-resume">Resume ↓</a>
+      </div>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ───── HERO ───── -->
+  <section class="hero" id="home">
+    <div class="container hero-grid">
+
+      <div class="hero-text">
+        <p class="hero-greeting reveal">Hi, I'm</p>
+        <h1 class="hero-name reveal">Agniva<br>Banerjee</h1>
+        <p class="hero-role reveal">
+          Software Engineer <span class="accent-dot">·</span> Wells Fargo
+        </p>
+        <p class="hero-bio reveal">
+          Full-stack &amp; backend engineer with a strong focus on
+          <strong>databases</strong>, <strong>distributed systems</strong>, and
+          <strong>developer tooling</strong>. I design production-grade backend
+          services, data pipelines, and APIs that prioritize correctness,
+          fault tolerance, and scalability — from credit finance platforms to
+          internal developer portals.
+        </p>
+        <div class="hero-actions reveal">
+          <a href="#contact" class="btn-primary" id="heroContactBtn">Get In Touch</a>
+          <a href="agniva_wells.pdf" download class="btn-secondary" id="heroResumeBtn">Download Resume</a>
+        </div>
+        <div class="hero-socials reveal">
+          <a href="https://github.com/BanerjeeAgniva/" target="_blank" rel="noopener" class="social-icon" title="GitHub" id="socialGithub">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.373 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/in/agnivabanerjee6/" target="_blank" rel="noopener" class="social-icon" title="LinkedIn" id="socialLinkedin">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/>
+            </svg>
+          </a>
+          <a href="https://codeforces.com/profile/Agniva_" target="_blank" rel="noopener" class="social-icon" title="Codeforces" id="socialCodeforces">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M4.5 7.5A1.5 1.5 0 0 1 6 9v10.5A1.5 1.5 0 0 1 4.5 21h-3A1.5 1.5 0 0 1 0 19.5V9A1.5 1.5 0 0 1 1.5 7.5h3zm9-4.5A1.5 1.5 0 0 1 15 4.5v15A1.5 1.5 0 0 1 13.5 21h-3A1.5 1.5 0 0 1 9 19.5v-15A1.5 1.5 0 0 1 10.5 3h3zm9 7.5A1.5 1.5 0 0 1 24 12v7.5A1.5 1.5 0 0 1 22.5 21h-3A1.5 1.5 0 0 1 18 19.5V12a1.5 1.5 0 0 1 1.5-1.5h3z"/>
+            </svg>
+          </a>
+          <a href="mailto:coolagniva12@gmail.com" class="social-icon" title="Email" id="socialEmail">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-photo reveal">
+        <div class="photo-wrapper">
+          <img src="myphoto.jpg" alt="Agniva Banerjee" id="profilePhoto" />
+          <div class="photo-ring"></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="scroll-hint"><div class="scroll-line"></div></div>
+  </section>
+
+  <!-- ───── ABOUT ───── -->
+  <section class="section" id="about">
+    <div class="container about-grid">
+      <div class="about-left reveal">
+        <h2 class="section-title">About Me</h2>
+        <p>
+          I'm a software engineer who thrives at the intersection of backend architecture and
+          user-facing systems. With a dual degree in Computer Science and Economics from
+          <strong>BITS Pilani</strong>, I bring both technical depth and analytical thinking to
+          every problem I tackle.
+        </p>
+        <p>
+          At <strong>Wells Fargo</strong>, I build backend services for subscription credit finance,
+          working with SQL Server and ASP.NET to ensure data integrity at scale. Previously at
+          <strong>Harness</strong>, I shipped 5 production Backstage plugins, drove 50% faster
+          onboarding, and championed developer experience for 120+ engineers.
+        </p>
+        <p>
+          Outside work, I'm an active competitive programmer — an <strong>ICPC Regionalist</strong>
+          who enjoys challenging algorithm problems on Codeforces.
+        </p>
+      </div>
+      <div class="about-right reveal">
+        <div class="about-stats">
+          <div class="stat-card">
+            <span class="stat-num">3+</span>
+            <span class="stat-label">Years of Experience</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">5</span>
+            <span class="stat-label">Production Plugins Built</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">50%</span>
+            <span class="stat-label">Onboarding Time Reduced</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">120+</span>
+            <span class="stat-label">Engineers Impacted</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───── EXPERIENCE ───── -->
+  <section class="section" id="experience">
+    <div class="container">
+      <h2 class="section-title reveal">Experience</h2>
+
+      <div class="timeline">
+
+        <!-- Wells Fargo -->
+        <div class="timeline-item reveal" id="expWellsFargo">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="tc-header">
+              <div>
+                <h3 class="tc-company">Wells Fargo</h3>
+                <p class="tc-role">Program Associate, Software Engineering</p>
+              </div>
+              <div class="tc-meta">
+                <span class="tc-date">Sep 2025 – Present</span>
+                <span class="tc-location">Hyderabad, India</span>
+              </div>
+            </div>
+            <ul class="tc-bullets">
+              <li>Develop full-stack systems supporting subscription credit finance within Corporate &amp; Investment Banking Technology.</li>
+              <li>Build backend services with <em>C#</em>, <em>ASP.NET MVC</em>, <em>SQL Server</em> — ensuring data integrity and fault tolerance.</li>
+              <li>Implement <em>Angular</em> &amp; <em>TypeScript</em> UI features improving productivity for credit analysts and operations teams.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Harness -->
+        <div class="timeline-item reveal" id="expHarness">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="tc-header">
+              <div>
+                <h3 class="tc-company">Harness</h3>
+                <p class="tc-role">Software Engineering Intern</p>
+              </div>
+              <div class="tc-meta">
+                <span class="tc-date">Jul 2024 – Jun 2025</span>
+                <span class="tc-location">Bengaluru, India</span>
+              </div>
+            </div>
+            <ul class="tc-bullets">
+              <li>Improved developer productivity by <strong>25%</strong> integrating GitHub Copilot, Wiz, Buildkite &amp; DX tooling into a Backstage-based Internal Developer Portal used by <strong>120+ engineers</strong>.</li>
+              <li>Built 5 production-grade Backstage plugins with <em>TypeScript</em>, <em>React</em>, <em>Node.js</em> — owning frontend/backend services, proxy integrations, JSON schema validation &amp; secret handling for CI/CD workflows.</li>
+              <li>Delivered self-service CI/CD workflows, reducing engineer onboarding time by <strong>50%</strong>.</li>
+              <li>Expanded test coverage by <strong>35%</strong> with <em>Cypress</em>, <em>TestNG</em>, <em>Postman</em> across QA, PROD &amp; EU environments.</li>
+              <li>Improved post-deployment stability by <strong>30%</strong> via multi-environment sanity checks and <em>GCP</em> error monitoring.</li>
+              <li>Built a PR review assistant during HackWeek 2025 integrating Jira MCP APIs, reducing review iterations by <strong>20%</strong>.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Urjanet -->
+        <div class="timeline-item reveal" id="expUrjanet">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="tc-header">
+              <div>
+                <h3 class="tc-company">Urjanet</h3>
+                <p class="tc-role">Data Engineer Intern</p>
+              </div>
+              <div class="tc-meta">
+                <span class="tc-date">May 2022 – Jul 2022</span>
+                <span class="tc-location">Remote</span>
+              </div>
+            </div>
+            <ul class="tc-bullets">
+              <li>Analyzed 50,000+ records using <em>Python</em> dashboards and geospatial visualizations to surface regional inefficiencies.</li>
+              <li>Streamlined legacy analytics workflows, reducing manual reporting effort by <strong>40%</strong> and improving data accessibility.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div><!-- /timeline -->
+    </div>
+  </section>
+
+  <!-- ───── SKILLS ───── -->
+  <section class="section" id="skills">
+    <div class="container">
+      <h2 class="section-title reveal">Skills</h2>
+      <div class="skills-grid">
+
+        <div class="skill-group reveal">
+          <h3 class="skill-cat">Languages</h3>
+          <div class="skill-pills">
+            <span class="pill">Java</span><span class="pill">C++</span><span class="pill">Python</span>
+            <span class="pill">C#</span><span class="pill">SQL</span><span class="pill">TypeScript</span>
+          </div>
+        </div>
+
+        <div class="skill-group reveal">
+          <h3 class="skill-cat">Frameworks &amp; Libraries</h3>
+          <div class="skill-pills">
+            <span class="pill">Angular</span><span class="pill">React</span><span class="pill">Node.js</span>
+            <span class="pill">ASP.NET MVC</span><span class="pill">Spring</span>
+          </div>
+        </div>
+
+        <div class="skill-group reveal">
+          <h3 class="skill-cat">Cloud &amp; DevOps</h3>
+          <div class="skill-pills">
+            <span class="pill">GCP</span><span class="pill">Jenkins</span>
+            <span class="pill">Harness CI/CD</span><span class="pill">Backstage</span>
+            <span class="pill">Buildkite</span>
+          </div>
+        </div>
+
+        <div class="skill-group reveal">
+          <h3 class="skill-cat">Databases &amp; Tools</h3>
+          <div class="skill-pills">
+            <span class="pill">SQL Server</span><span class="pill">Git</span>
+            <span class="pill">Postman</span><span class="pill">Jira</span>
+            <span class="pill">Cypress</span><span class="pill">TestNG</span>
+          </div>
+        </div>
+
+        <div class="skill-group reveal">
+          <h3 class="skill-cat">Core CS</h3>
+          <div class="skill-pills">
+            <span class="pill">Data Structures</span><span class="pill">Algorithms</span>
+            <span class="pill">Object-Oriented Design</span><span class="pill">Distributed Systems</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Awards -->
+      <div class="awards-block reveal">
+        <h3 class="skill-cat">Certifications &amp; Awards</h3>
+        <div class="awards-list">
+          <div class="award-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/>
+            </svg>
+            <span><strong>ICPC Regionalist</strong> — Kanpur-Mathura (Rank 68), Gwalior-Pune (Rank 318)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───── CONTACT ───── -->
+  <section class="section" id="contact">
+    <div class="container contact-container">
+      <h2 class="section-title reveal">Get In Touch</h2>
+      <p class="contact-sub reveal">
+        I'm always open to interesting opportunities, collaborations, or just a good tech conversation.
+        Feel free to reach out!
+      </p>
+      <div class="contact-links reveal">
+        <a href="mailto:coolagniva12@gmail.com" class="contact-card" id="contactEmail">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          <span>coolagniva12@gmail.com</span>
+        </a>
+        <a href="https://www.linkedin.com/in/agnivabanerjee6/" target="_blank" rel="noopener" class="contact-card" id="contactLinkedin">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/>
+          </svg>
+          <span>agnivabanerjee6</span>
+        </a>
+        <a href="https://github.com/BanerjeeAgniva/" target="_blank" rel="noopener" class="contact-card" id="contactGithub">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+          </svg>
+          <span>BanerjeeAgniva</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───── FOOTER ───── -->
+  <footer class="footer">
+    <div class="container">
+      <p>Designed &amp; Built by <strong>Agniva Banerjee</strong> · 2025</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
