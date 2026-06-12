@@ -85,3 +85,25 @@ sections.forEach(s => sectionObserver.observe(s));
 const style = document.createElement('style');
 style.textContent = `.nav-link.active { color: var(--accent) !important; background: var(--accent-glow) !important; }`;
 document.head.appendChild(style);
+
+/* ─── Scroll Progress Bar ─── */
+const scrollProgress = document.getElementById('scrollProgress');
+window.addEventListener('scroll', () => {
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  scrollProgress.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+}, { passive: true });
+
+/* ─── Copy Email to Clipboard ─── */
+const copyEmailBtn = document.getElementById('copyEmailBtn');
+const toast = document.getElementById('toast');
+let toastTimer;
+
+copyEmailBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  navigator.clipboard.writeText('coolagniva12@gmail.com').then(() => {
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+  });
+});

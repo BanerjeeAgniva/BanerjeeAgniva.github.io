@@ -14,6 +14,8 @@
 </head>
 <body>
 
+  <div class="scroll-progress" id="scrollProgress"></div>
+
   <!-- ───── NAVBAR ───── -->
   <nav class="navbar" id="navbar">
     <div class="nav-inner">
@@ -164,9 +166,14 @@
           <div class="timeline-dot"></div>
           <div class="timeline-card">
             <div class="tc-header">
-              <div>
-                <h3 class="tc-company">Wells Fargo</h3>
-                <p class="tc-role">Program Associate, Software Engineering</p>
+              <div class="tc-title-wrap">
+                <div class="company-logo">
+                  <img src="https://www.google.com/s2/favicons?domain=wellsfargo.com&amp;sz=128" alt="Wells Fargo logo" loading="lazy" onerror="this.parentElement.style.display='none'" />
+                </div>
+                <div>
+                  <h3 class="tc-company">Wells Fargo</h3>
+                  <p class="tc-role">Program Associate, Software Engineering</p>
+                </div>
               </div>
               <div class="tc-meta">
                 <span class="tc-date">Sep 2025 – Present</span>
@@ -186,9 +193,14 @@
           <div class="timeline-dot"></div>
           <div class="timeline-card">
             <div class="tc-header">
-              <div>
-                <h3 class="tc-company">Harness</h3>
-                <p class="tc-role">Software Engineering Intern</p>
+              <div class="tc-title-wrap">
+                <div class="company-logo">
+                  <img src="https://www.google.com/s2/favicons?domain=harness.io&amp;sz=128" alt="Harness logo" loading="lazy" onerror="this.parentElement.style.display='none'" />
+                </div>
+                <div>
+                  <h3 class="tc-company">Harness</h3>
+                  <p class="tc-role">Software Engineering Intern</p>
+                </div>
               </div>
               <div class="tc-meta">
                 <span class="tc-date">Jul 2024 – Jun 2025</span>
@@ -211,9 +223,14 @@
           <div class="timeline-dot"></div>
           <div class="timeline-card">
             <div class="tc-header">
-              <div>
-                <h3 class="tc-company">Urjanet</h3>
-                <p class="tc-role">Data Engineer Intern</p>
+              <div class="tc-title-wrap">
+                <div class="company-logo">
+                  <img src="https://www.google.com/s2/favicons?domain=urjanet.com&amp;sz=128" alt="Urjanet logo" loading="lazy" onerror="this.parentElement.style.display='none'" />
+                </div>
+                <div>
+                  <h3 class="tc-company">Urjanet</h3>
+                  <p class="tc-role">Data Engineer Intern</p>
+                </div>
               </div>
               <div class="tc-meta">
                 <span class="tc-date">May 2022 – Jul 2022</span>
@@ -240,34 +257,46 @@
         <div class="skill-group reveal">
           <h3 class="skill-cat">Languages</h3>
           <div class="skill-pills">
-            <span class="pill">Java</span><span class="pill">C++</span><span class="pill">Python</span>
-            <span class="pill">C#</span><span class="pill">SQL</span><span class="pill">TypeScript</span>
+            <span class="pill"><img class="pill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="" loading="lazy" onerror="this.remove()" />Java</span>
+            <span class="pill"><img class="pill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="" loading="lazy" onerror="this.remove()" />C++</span>
+            <span class="pill"><img class="pill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="" loading="lazy" onerror="this.remove()" />Python</span>
+            <span class="pill"><img class="pill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="" loading="lazy" onerror="this.remove()" />C#</span>
+            <span class="pill"><img class="pill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" alt="" loading="lazy" onerror="this.remove()" />SQL</span>
+            <span class="pill"><img class="pill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="" loading="lazy" onerror="this.remove()" />TypeScript</span>
           </div>
         </div>
 
         <div class="skill-group reveal">
           <h3 class="skill-cat">Frameworks &amp; Libraries</h3>
           <div class="skill-pills">
-            <span class="pill">Angular</span><span class="pill">React</span><span class="pill">Node.js</span>
-            <span class="pill">ASP.NET MVC</span><span class="pill">Spring</span>
+            <span class="pill"><img class="pill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" alt="" loading="lazy" onerror="this.remove()" />Angular</span>
+            <span class="pill"><img class="pill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="" loading="lazy" onerror="this.remove()" />React</span>
+            <span class="pill"><img class="pill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="" loading="lazy" onerror="this.remove()" />Node.js</span>
+            <span class="pill"><img class="pill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg" alt="" loading="lazy" onerror="this.remove()" />ASP.NET MVC</span>
+            <span class="pill"><img class="pill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="" loading="lazy" onerror="this.remove()" />Spring</span>
           </div>
         </div>
 
         <div class="skill-group reveal">
           <h3 class="skill-cat">Cloud &amp; DevOps</h3>
           <div class="skill-pills">
-            <span class="pill">GCP</span><span class="pill">Jenkins</span>
-            <span class="pill">Harness CI/CD</span><span class="pill">Backstage</span>
-            <span class="pill">Buildkite</span>
+            <span class="pill"><img class="pill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="" loading="lazy" onerror="this.remove()" />GCP</span>
+            <span class="pill"><img class="pill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" alt="" loading="lazy" onerror="this.remove()" />Jenkins</span>
+            <span class="pill"><img class="pill-icon" src="https://www.google.com/s2/favicons?domain=harness.io&amp;sz=64" alt="" loading="lazy" onerror="this.remove()" />Harness CI/CD</span>
+            <span class="pill"><img class="pill-icon" src="https://cdn.simpleicons.org/backstage" alt="" loading="lazy" onerror="this.remove()" />Backstage</span>
+            <span class="pill"><img class="pill-icon" src="https://cdn.simpleicons.org/buildkite" alt="" loading="lazy" onerror="this.remove()" />Buildkite</span>
           </div>
         </div>
 
         <div class="skill-group reveal">
           <h3 class="skill-cat">Databases &amp; Tools</h3>
           <div class="skill-pills">
-            <span class="pill">SQL Server</span><span class="pill">Git</span>
-            <span class="pill">Postman</span><span class="pill">Jira</span>
-            <span class="pill">Cypress</span><span class="pill">TestNG</span>
+            <span class="pill"><img class="pill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" alt="" loading="lazy" onerror="this.remove()" />SQL Server</span>
+            <span class="pill"><img class="pill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="" loading="lazy" onerror="this.remove()" />Git</span>
+            <span class="pill"><img class="pill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" alt="" loading="lazy" onerror="this.remove()" />Postman</span>
+            <span class="pill"><img class="pill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg" alt="" loading="lazy" onerror="this.remove()" />Jira</span>
+            <span class="pill"><img class="pill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cypressio/cypressio-original.svg" alt="" loading="lazy" onerror="this.remove()" />Cypress</span>
+            <span class="pill">TestNG</span>
           </div>
         </div>
 
@@ -311,6 +340,12 @@
             <polyline points="22,6 12,13 2,6"/>
           </svg>
           <span>coolagniva12@gmail.com</span>
+          <button class="copy-btn" id="copyEmailBtn" title="Copy email" aria-label="Copy email to clipboard">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+          </button>
         </a>
         <a href="https://www.linkedin.com/in/agnivabanerjee6/" target="_blank" rel="noopener" class="contact-card" id="contactLinkedin">
           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
@@ -334,6 +369,8 @@
       <p>Designed &amp; Built by <strong>Agniva Banerjee</strong> · 2026</p>
     </div>
   </footer>
+
+  <div class="toast" id="toast" role="status">Email copied to clipboard ✓</div>
 
   <script src="script.js"></script>
 </body>

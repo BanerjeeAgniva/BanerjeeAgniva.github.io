@@ -73,6 +73,18 @@ strong { font-weight: 600; }
 .accent-dot { color: var(--accent); }
 
 /* ═══════════════════════════════════════
+   SCROLL PROGRESS
+═══════════════════════════════════════ */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  width: 0;
+  background: linear-gradient(to right, var(--accent), var(--accent-h));
+  z-index: 2000;
+}
+
+/* ═══════════════════════════════════════
    NAVBAR
 ═══════════════════════════════════════ */
 .navbar {
@@ -532,6 +544,28 @@ strong { font-weight: 600; }
   flex-wrap: wrap;
 }
 
+.tc-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.95rem;
+}
+
+.company-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px; height: 46px;
+  flex-shrink: 0;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  overflow: hidden;
+}
+.company-logo img {
+  width: 28px; height: 28px;
+  object-fit: contain;
+}
+
 .tc-company {
   font-family: 'Fraunces', Georgia, serif;
   font-size: 1.25rem;
@@ -617,7 +651,9 @@ strong { font-weight: 600; }
 
 .pill {
   display: inline-flex;
-  padding: 0.35rem 0.95rem;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
   background: transparent;
   color: var(--text-sec);
   border: 1px solid var(--border);
@@ -633,6 +669,12 @@ strong { font-weight: 600; }
   border-color: var(--accent);
   background: var(--accent-glow);
   box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+.pill-icon {
+  width: 16px; height: 16px;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 /* Awards */
@@ -697,6 +739,50 @@ strong { font-weight: 600; }
   box-shadow: var(--shadow-lg);
 }
 .contact-card svg { color: var(--accent); }
+
+.copy-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.25rem;
+  padding: 5px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  color: var(--text-mute);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.copy-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-glow);
+}
+.copy-btn svg { color: inherit; }
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translate(-50%, 16px);
+  padding: 0.7rem 1.5rem;
+  background: var(--bg-card);
+  color: var(--text);
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  font-size: 0.86rem;
+  font-weight: 500;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+  z-index: 3000;
+}
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
 
 /* ═══════════════════════════════════════
    FOOTER
