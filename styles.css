@@ -18,6 +18,8 @@
   --shadow:    0 2px 20px rgba(10, 30, 70, 0.08);
   --shadow-lg: 0 8px 40px rgba(10, 30, 70, 0.12);
   --nav-blur:  rgba(244, 247, 251, 0.85);
+  --section-bg:  rgba(244, 247, 251, 0.70);
+  --section-alt: rgba(234, 240, 249, 0.78);
 }
 
 [data-theme="dark"] {
@@ -36,6 +38,8 @@
   --shadow:    0 2px 20px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.4);
   --nav-blur:  rgba(10, 25, 47, 0.88);
+  --section-bg:  rgba(10, 25, 47, 0.62);
+  --section-alt: rgba(13, 31, 56, 0.74);
 }
 
 /* ═══════════════════════════════════════
@@ -222,12 +226,13 @@ strong { font-weight: 600; }
 }
 .hero .container { position: relative; z-index: 1; }
 
-.hero-canvas {
-  position: absolute;
+/* Full-page animated field — fixed behind all content */
+.bg-canvas {
+  position: fixed;
   inset: 0;
   width: 100%;
   height: 100%;
-  z-index: 0;
+  z-index: -1;
   pointer-events: none;
 }
 
@@ -410,8 +415,9 @@ strong { font-weight: 600; }
 ═══════════════════════════════════════ */
 .section {
   padding: 6rem 0;
+  background: var(--section-bg);
 }
-.section:nth-child(odd) { background: var(--bg-alt); }
+.section:nth-child(odd) { background: var(--section-alt); }
 
 .section-title {
   font-family: 'Fraunces', Georgia, serif;

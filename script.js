@@ -110,7 +110,7 @@ copyEmailBtn.addEventListener('click', (e) => {
 
 /* ─── Hero Flow-Field Animation (data packets riding flowing lanes) ─── */
 (function () {
-  const canvas = document.getElementById('heroCanvas');
+  const canvas = document.getElementById('bgCanvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
