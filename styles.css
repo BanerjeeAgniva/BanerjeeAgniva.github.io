@@ -709,6 +709,31 @@ strong { font-weight: 600; }
 .award-item strong { color: var(--text); }
 
 /* ═══════════════════════════════════════
+   MUSIC
+═══════════════════════════════════════ */
+.music-sub {
+  font-size: 0.97rem;
+  color: var(--text-sec);
+  max-width: 620px;
+  margin-bottom: 2rem;
+  line-height: 1.75;
+}
+
+.music-embed {
+  max-width: 760px;
+  border-radius: 14px;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+}
+.music-embed iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+}
+
+/* ═══════════════════════════════════════
    CONTACT
 ═══════════════════════════════════════ */
 .contact-container {
