@@ -28,6 +28,7 @@
         <li><a href="#experience" class="nav-link">Experience</a></li>
         <li><a href="#skills"     class="nav-link">Skills</a></li>
         <li><a href="#music"      class="nav-link">Music</a></li>
+        <li><a href="#game"       class="nav-link">Word Game</a></li>
         <li><a href="#contact"    class="nav-link">Contact</a></li>
       </ul>
 
@@ -345,6 +346,46 @@
           allowfullscreen
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
         </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───── WORD GAME ───── -->
+  <section class="section" id="game">
+    <div class="container">
+      <h2 class="section-title reveal">Word Game</h2>
+      <p class="game-sub reveal">
+        A tiny vocabulary Wordle — every word is an uncommon-but-useful one worth
+        dropping into real conversation. Guess it in six tries. Win or lose, you
+        leave with the word's meaning and a natural way to use it. Hit
+        <span class="kbd-inline">↻ New word</span> for a fresh one anytime.
+      </p>
+
+      <div class="game-card reveal">
+        <div class="game-head">
+          <div class="game-meta">
+            <span class="game-len" id="gameLen">— letters</span>
+            <span class="game-pos" id="gamePos"></span>
+          </div>
+          <button class="game-refresh" id="gameRefresh" type="button">↻ New word</button>
+        </div>
+
+        <div class="game-board" id="gameBoard" aria-label="Word guessing grid"></div>
+
+        <div class="game-msg" id="gameMsg" role="status" aria-live="polite"></div>
+
+        <div class="game-keyboard" id="gameKeyboard" aria-hidden="false"></div>
+
+        <div class="game-result" id="gameResult" hidden>
+          <div class="gr-status" id="grStatus"></div>
+          <div class="gr-word">
+            <span class="gr-term" id="grTerm"></span>
+            <span class="gr-pos" id="grPos"></span>
+          </div>
+          <p class="gr-def" id="grDef"></p>
+          <p class="gr-use"><span class="gr-use-label">Use it:</span> <span id="grUse"></span></p>
+          <button class="btn-primary gr-next" id="grNext" type="button">Play another →</button>
+        </div>
       </div>
     </div>
   </section>

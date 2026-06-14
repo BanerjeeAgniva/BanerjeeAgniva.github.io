@@ -122,6 +122,267 @@ copyEmailBtn.addEventListener('click', (e) => {
   });
 });
 
+/* ─── Vocabulary Wordle ─── */
+(function () {
+  const board    = document.getElementById('gameBoard');
+  const keyboard = document.getElementById('gameKeyboard');
+  if (!board || !keyboard) return;
+
+  const lenEl     = document.getElementById('gameLen');
+  const posEl     = document.getElementById('gamePos');
+  const msgEl     = document.getElementById('gameMsg');
+  const refreshEl = document.getElementById('gameRefresh');
+  const resultEl  = document.getElementById('gameResult');
+  const grStatus  = document.getElementById('grStatus');
+  const grTerm    = document.getElementById('grTerm');
+  const grPos     = document.getElementById('grPos');
+  const grDef     = document.getElementById('grDef');
+  const grUse     = document.getElementById('grUse');
+  const grNext    = document.getElementById('grNext');
+
+  const MAX_ROWS = 6;
+
+  // Curated bank: uncommon-but-conversational words, each with a short
+  // definition and a natural usage sentence. (3–9 letters.)
+  const WORDS = [
+    { w: 'pithy',    pos: 'adjective', def: 'Brief, forceful, and full of meaning.',                 use: 'His pithy summary said in one line what the report took ten pages to explain.' },
+    { w: 'laconic',  pos: 'adjective', def: 'Using very few words; terse.',                          use: 'Her laconic “fine” made it clear she was anything but.' },
+    { w: 'candor',   pos: 'noun',      def: 'Honest, open, and sincere expression.',                 use: 'I appreciated his candor when he admitted the plan had flaws.' },
+    { w: 'nuance',   pos: 'noun',      def: 'A subtle shade of meaning or difference.',              use: 'Good translators capture the nuance, not just the literal words.' },
+    { w: 'astute',   pos: 'adjective', def: 'Sharp, perceptive, and clever.',                        use: 'That was an astute observation about why the project stalled.' },
+    { w: 'sanguine', pos: 'adjective', def: 'Cheerfully optimistic, even in tough times.',           use: 'Despite the setback, she stayed sanguine about the launch.' },
+    { w: 'eloquent', pos: 'adjective', def: 'Fluent and persuasive in speech or writing.',           use: 'Her eloquent toast left half the table in tears.' },
+    { w: 'affable',  pos: 'adjective', def: 'Friendly, warm, and easy to talk to.',                  use: 'The new manager is so affable that people line up to chat.' },
+    { w: 'cogent',   pos: 'adjective', def: 'Clear, logical, and convincing.',                       use: 'She made a cogent case for delaying the release.' },
+    { w: 'lucid',    pos: 'adjective', def: 'Clear and easy to understand.',                          use: 'Thanks for the lucid explanation — it finally clicked.' },
+    { w: 'prudent',  pos: 'adjective', def: 'Careful, sensible, and wise in practice.',              use: 'It is prudent to keep a backup before you deploy.' },
+    { w: 'succinct', pos: 'adjective', def: 'Briefly and clearly expressed.',                        use: 'Keep the update succinct; everyone is short on time.' },
+    { w: 'adept',    pos: 'adjective', def: 'Highly skilled or proficient.',                          use: 'She is remarkably adept at defusing tense meetings.' },
+    { w: 'rapport',  pos: 'noun',      def: 'A relationship of mutual understanding and trust.',     use: 'They built an easy rapport within minutes.' },
+    { w: 'poignant', pos: 'adjective', def: 'Deeply moving; keenly touching.',                       use: 'It was a poignant goodbye after ten years together.' },
+    { w: 'earnest',  pos: 'adjective', def: 'Sincere and seriously intentioned.',                    use: 'His earnest apology smoothed everything over.' },
+    { w: 'blithe',   pos: 'adjective', def: 'Carefree and cheerfully unconcerned.',                  use: 'She gave a blithe wave and carried on.' },
+    { w: 'droll',    pos: 'adjective', def: 'Amusing in an odd or whimsical way.',                   use: 'He has a droll way of delivering even bad news.' },
+    { w: 'canny',    pos: 'adjective', def: 'Shrewd, especially in money or business.',              use: 'A canny investor, she sold just before the dip.' },
+    { w: 'banter',   pos: 'noun',      def: 'Playful, teasing conversation.',                        use: 'The interview ended with some friendly banter.' },
+    { w: 'jovial',   pos: 'adjective', def: 'Cheerful and good-humored.',                            use: 'Our host was jovial and kept everyone laughing.' },
+    { w: 'ardent',   pos: 'adjective', def: 'Very enthusiastic or passionate.',                      use: 'He is an ardent supporter of open-source.' },
+    { w: 'cordial',  pos: 'adjective', def: 'Warm and friendly.',                                    use: 'We reached a cordial agreement over coffee.' },
+    { w: 'quip',     pos: 'noun',      def: 'A witty or clever remark.',                             use: 'He lightened the mood with a quick quip.' },
+    { w: 'whimsy',   pos: 'noun',      def: 'Playfully quaint or fanciful behavior.',               use: 'The design has a touch of whimsy that users love.' },
+    { w: 'diligent', pos: 'adjective', def: 'Hardworking and careful.',                              use: 'A diligent reviewer caught the bug before release.' },
+    { w: 'amicable', pos: 'adjective', def: 'Friendly and free of conflict.',                        use: 'They reached an amicable split with no hard feelings.' },
+    { w: 'verbose',  pos: 'adjective', def: 'Using more words than needed.',                         use: 'The email was so verbose I just skimmed it.' },
+    { w: 'brevity',  pos: 'noun',      def: 'Concise and exact use of words.',                       use: 'Brevity is a kindness in a long meeting.' },
+    { w: 'tactful',  pos: 'adjective', def: 'Sensitive and diplomatic with people.',                use: 'A tactful nudge worked better than a blunt order.' },
+    { w: 'genial',   pos: 'adjective', def: 'Pleasant, friendly, and good-natured.',                use: 'His genial manner put the nervous candidate at ease.' },
+    { w: 'wry',      pos: 'adjective', def: 'Dryly and cleverly humorous.',                          use: 'She raised an eyebrow and made a wry remark.' },
+    { w: 'apt',      pos: 'adjective', def: 'Strikingly appropriate or fitting.',                    use: 'That was an apt comparison — it nailed the problem.' },
+    { w: 'savvy',    pos: 'noun',      def: 'Practical know-how and shrewdness.',                    use: 'Her marketing savvy doubled our reach.' }
+  ];
+
+  let answer = '', meta = null, prevIndex = -1;
+  let row = 0, col = 0, over = false;
+  let cells = [];          // cells[r][c]
+  let rowEls = [];
+  const keyEls = {};       // letter -> button
+  const keyState = {};     // letter -> 'absent'|'present'|'correct'
+
+  function pick() {
+    let i;
+    do { i = (Math.random() * WORDS.length) | 0; } while (i === prevIndex && WORDS.length > 1);
+    prevIndex = i;
+    meta = WORDS[i];
+    answer = meta.w.toLowerCase();
+  }
+
+  function buildBoard() {
+    board.innerHTML = '';
+    cells = []; rowEls = [];
+    for (let r = 0; r < MAX_ROWS; r++) {
+      const rowEl = document.createElement('div');
+      rowEl.className = 'game-row';
+      const rowCells = [];
+      for (let c = 0; c < answer.length; c++) {
+        const t = document.createElement('div');
+        t.className = 'tile';
+        rowEl.appendChild(t);
+        rowCells.push(t);
+      }
+      board.appendChild(rowEl);
+      rowEls.push(rowEl);
+      cells.push(rowCells);
+    }
+  }
+
+  const KB_ROWS = ['qwertyuiop', 'asdfghjkl', '↵zxcvbnm⌫']; // ↵ … ⌫
+  function buildKeyboard() {
+    keyboard.innerHTML = '';
+    for (const rowStr of KB_ROWS) {
+      const rEl = document.createElement('div');
+      rEl.className = 'kb-row';
+      for (const ch of rowStr) {
+        const k = document.createElement('button');
+        k.type = 'button';
+        if (ch === '↵') { k.className = 'key wide'; k.textContent = 'Enter'; k.dataset.k = 'enter'; }
+        else if (ch === '⌫') { k.className = 'key wide'; k.textContent = '⌫'; k.dataset.k = 'back'; }
+        else { k.className = 'key'; k.textContent = ch; k.dataset.k = ch; keyEls[ch] = k; }
+        rEl.appendChild(k);
+      }
+      keyboard.appendChild(rEl);
+    }
+  }
+
+  function flashMsg(text) {
+    msgEl.textContent = text;
+    clearTimeout(flashMsg._t);
+    flashMsg._t = setTimeout(() => { if (msgEl.textContent === text) msgEl.textContent = ''; }, 1600);
+  }
+
+  function addLetter(ch) {
+    if (over || col >= answer.length) return;
+    const t = cells[row][col];
+    t.textContent = ch;
+    t.classList.add('filled');
+    col++;
+  }
+  function removeLetter() {
+    if (over || col === 0) return;
+    col--;
+    const t = cells[row][col];
+    t.textContent = '';
+    t.classList.remove('filled');
+  }
+
+  function evaluate(guess) {
+    const res = Array(answer.length).fill('absent');
+    const counts = {};
+    for (const c of answer) counts[c] = (counts[c] || 0) + 1;
+    for (let i = 0; i < answer.length; i++) {
+      if (guess[i] === answer[i]) { res[i] = 'correct'; counts[guess[i]]--; }
+    }
+    for (let i = 0; i < answer.length; i++) {
+      if (res[i] === 'absent' && counts[guess[i]] > 0) { res[i] = 'present'; counts[guess[i]]--; }
+    }
+    return res;
+  }
+
+  const rank = { absent: 0, present: 1, correct: 2 };
+  function paintKey(ch, state) {
+    if (rank[state] <= rank[keyState[ch] || 'absent'] && keyState[ch]) return;
+    keyState[ch] = state;
+    const k = keyEls[ch];
+    if (k) { k.classList.remove('absent', 'present', 'correct'); k.classList.add(state); }
+  }
+
+  function submit() {
+    if (over) return;
+    if (col < answer.length) { rowEls[row].classList.add('shake'); flashMsg('Not enough letters'); setTimeout(() => rowEls[row].classList.remove('shake'), 420); return; }
+    const guess = cells[row].map(t => t.textContent.toLowerCase()).join('');
+    const res = evaluate(guess);
+
+    res.forEach((state, i) => {
+      const t = cells[row][i];
+      setTimeout(() => {
+        t.classList.add('reveal-flip');
+        setTimeout(() => { t.classList.add(state); paintKey(guess[i], state); }, 250);
+      }, i * 220);
+    });
+
+    const won = guess === answer;
+    const totalDelay = (answer.length - 1) * 220 + 520;
+    row++; col = 0;
+
+    if (won) {
+      over = true;
+      setTimeout(() => { celebrate(); showResult(true); }, totalDelay);
+    } else if (row >= MAX_ROWS) {
+      over = true;
+      setTimeout(() => showResult(false), totalDelay);
+    }
+  }
+
+  function showResult(won) {
+    grStatus.textContent = won ? '🚀 Nailed it!' : 'Out of tries — but here’s a word for you';
+    grTerm.textContent   = meta.w;
+    grPos.textContent    = meta.pos;
+    grDef.textContent    = meta.def;
+    grUse.textContent    = meta.use;
+    resultEl.hidden = false;
+    resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function newGame() {
+    pick();
+    row = 0; col = 0; over = false;
+    for (const k in keyState) delete keyState[k];
+    Object.values(keyEls).forEach(k => k.classList.remove('absent', 'present', 'correct'));
+    msgEl.textContent = '';
+    resultEl.hidden = true;
+    lenEl.textContent = answer.length + (answer.length === 1 ? ' letter' : ' letters');
+    posEl.textContent = '· ' + meta.pos;
+    buildBoard();
+  }
+
+  /* Rockets + confetti */
+  function celebrate() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const layer = document.createElement('div');
+    layer.className = 'celebrate-layer';
+    document.body.appendChild(layer);
+
+    const colors = ['#4d9de0', '#3aa76d', '#d4a017', '#e0556b', '#9b6de0', '#ffffff'];
+    for (let i = 0; i < 90; i++) {
+      const c = document.createElement('div');
+      c.className = 'cel-confetti';
+      c.style.left = Math.random() * 100 + 'vw';
+      c.style.background = colors[(Math.random() * colors.length) | 0];
+      c.style.animationDuration = (1.6 + Math.random() * 1.6) + 's';
+      c.style.animationDelay = (Math.random() * 0.5) + 's';
+      layer.appendChild(c);
+    }
+    for (let i = 0; i < 6; i++) {
+      const r = document.createElement('div');
+      r.className = 'cel-rocket';
+      r.textContent = '🚀';
+      r.style.left = (8 + Math.random() * 84) + 'vw';
+      r.style.animationDelay = (Math.random() * 0.6) + 's';
+      layer.appendChild(r);
+    }
+    setTimeout(() => layer.remove(), 3600);
+  }
+
+  /* Input wiring */
+  keyboard.addEventListener('click', (e) => {
+    const k = e.target.closest('.key');
+    if (!k) return;
+    const v = k.dataset.k;
+    if (v === 'enter') submit();
+    else if (v === 'back') removeLetter();
+    else addLetter(v);
+  });
+
+  // Physical keyboard — only while the game is on screen
+  let inView = false;
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver((entries) => { inView = entries[0].isIntersecting; }, { threshold: 0.25 })
+      .observe(document.getElementById('game'));
+  }
+  document.addEventListener('keydown', (e) => {
+    if (!inView || over) return;
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.key === 'Enter') { e.preventDefault(); submit(); }
+    else if (e.key === 'Backspace') { e.preventDefault(); removeLetter(); }
+    else if (/^[a-zA-Z]$/.test(e.key)) addLetter(e.key.toLowerCase());
+  });
+
+  refreshEl.addEventListener('click', newGame);
+  grNext.addEventListener('click', newGame);
+
+  buildKeyboard();
+  newGame();
+})();
+
 /* ─── Hero Flow-Field Animation (data packets riding flowing lanes) ─── */
 (function () {
   const canvas = document.getElementById('bgCanvas');
