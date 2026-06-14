@@ -1,0 +1,67 @@
+/**
+ * navigation.js — everything attached to the top navigation bar and scrolling
+ * chrome:
+ *   1. the mobile hamburger menu
+ *   2. the navbar drop-shadow that appears once you scroll
+ *   3. the "active" highlight that follows the section you're viewing
+ *   4. the thin progress bar at the very top of the page
+ *
+ * These are grouped together because they all react to navigation/scroll.
+ */
+export function initNavigation() {
+  /* ── Hamburger / Mobile Menu ── */
+  const hamburger = document.getElementById('hamburger');
+  const navLinks  = document.getElementById('navLinks');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+
+  // Close menu on nav-link click
+  navLinks.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      navLinks.classList.remove('open');
+    });
+  });
+
+  /* ── Navbar Scroll Shadow ── */
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.style.boxShadow = window.scrollY > 10
+      ? '0 2px 24px rgba(0,0,0,0.18)'
+      : 'none';
+  }, { passive: true });
+
+  /* ── Active nav link highlight on scroll ── */
+  const sections = document.querySelectorAll('section[id]');
+  const navItems = document.querySelectorAll('.nav-link');
+
+  const sectionObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navItems.forEach(link => link.classList.remove('active'));
+          const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    },
+    { rootMargin: '-40% 0px -55% 0px' }
+  );
+
+  sections.forEach(s => sectionObserver.observe(s));
+
+  // Add active style via CSS
+  const style = document.createElement('style');
+  style.textContent = `.nav-link.active { color: var(--accent) !important; background: var(--accent-glow) !important; }`;
+  document.head.appendChild(style);
+
+  /* ── Scroll Progress Bar ── */
+  const scrollProgress = document.getElementById('scrollProgress');
+  window.addEventListener('scroll', () => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    scrollProgress.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+  }, { passive: true });
+}
