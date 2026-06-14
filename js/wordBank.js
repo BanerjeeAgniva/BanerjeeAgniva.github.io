@@ -44,5 +44,29 @@ export const WORDS = [
   { w: 'genial',   pos: 'adjective', def: 'Pleasant, friendly, and good-natured.',                use: 'His genial manner put the nervous candidate at ease.' },
   { w: 'wry',      pos: 'adjective', def: 'Dryly and cleverly humorous.',                          use: 'She raised an eyebrow and made a wry remark.' },
   { w: 'apt',      pos: 'adjective', def: 'Strikingly appropriate or fitting.',                    use: 'That was an apt comparison — it nailed the problem.' },
-  { w: 'savvy',    pos: 'noun',      def: 'Practical know-how and shrewdness.',                    use: 'Her marketing savvy doubled our reach.' }
+  { w: 'savvy',    pos: 'noun',      def: 'Practical know-how and shrewdness.',                    use: 'Her marketing savvy doubled our reach.' },
+
+  // ── Verbs ──
+  { w: 'glean',     pos: 'verb', def: 'Gather (information) bit by bit.',                use: 'I gleaned a few useful tips from the talk.' },
+  { w: 'broach',    pos: 'verb', def: 'Bring up a difficult or sensitive topic.',       use: 'She gently broached the subject of money.' },
+  { w: 'bolster',   pos: 'verb', def: 'Support or strengthen.',                         use: 'These results bolster our argument.' },
+  { w: 'placate',   pos: 'verb', def: 'Calm or appease someone.',                       use: 'A quick apology placated the client.' },
+  { w: 'quell',     pos: 'verb', def: 'Put an end to; suppress.',                       use: 'A few calm words quelled the panic.' },
+  { w: 'garner',    pos: 'verb', def: 'Gather or earn (support, praise).',              use: 'The idea garnered plenty of support.' },
+  { w: 'relish',    pos: 'verb', def: 'Enjoy greatly.',                                 use: 'He relishes a good debate.' },
+  { w: 'posit',     pos: 'verb', def: 'Put forward as fact or a basis for argument.',  use: 'Let me posit a simpler explanation.' },
+  { w: 'elicit',    pos: 'verb', def: 'Draw out a response or reaction.',              use: 'The question elicited an awkward silence.' },
+  { w: 'concede',   pos: 'verb', def: 'Admit something is true; yield.',               use: 'I will concede that you were right.' },
+  { w: 'meander',   pos: 'verb', def: 'Wander or drift aimlessly.',                    use: 'The conversation meandered for an hour.' },
+  { w: 'galvanize', pos: 'verb', def: 'Shock or spur into action.',                    use: 'The setback galvanized the whole team.' },
+  { w: 'mull',      pos: 'verb', def: 'Think something over.',                          use: 'Give me a day to mull it over.' },
+  { w: 'hone',      pos: 'verb', def: 'Sharpen or refine.',                            use: 'She honed her pitch over many rounds.' },
+
+  // ── More nouns ──
+  { w: 'aplomb',  pos: 'noun', def: 'Self-confident poise under pressure.',  use: 'She handled the tough question with aplomb.' },
+  { w: 'knack',   pos: 'noun', def: 'A natural skill or talent.',            use: 'He has a knack for explaining hard ideas.' },
+  { w: 'gist',    pos: 'noun', def: 'The main point or essence.',            use: 'Just give me the gist of the meeting.' },
+  { w: 'crux',    pos: 'noun', def: 'The decisive or most important point.', use: 'That is the crux of the problem.' },
+  { w: 'forte',   pos: 'noun', def: 'A person’s strong point.',         use: 'Public speaking is her forte.' },
+  { w: 'wit',     pos: 'noun', def: 'Quick, clever humor.',                  use: 'His wit kept the whole meeting lively.' }
 ];

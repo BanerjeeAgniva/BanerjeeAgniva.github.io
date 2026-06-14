@@ -89,7 +89,8 @@ This is the most involved piece, so here's its flow (all in `js/wordGame.js`):
    once, then calls `newGame()`.
 2. **`newGame()`** picks a random word from `wordBank.js` (never the same one
    twice in a row), resets all state, and builds a fresh board sized to that
-   word's length.
+   word's length. A "Word type" filter (All / Noun / Verb / Adjective) narrows
+   the pool — `wordPool()` returns only the matching entries.
 3. The player types — via the on-screen keyboard (click) or the physical
    keyboard (only while the game is scrolled into view). `addLetter` /
    `removeLetter` fill the current row.
@@ -109,7 +110,8 @@ This is the most involved piece, so here's its flow (all in `js/wordGame.js`):
    **`celebrate()`** (rockets + confetti).
 
 **To change the words:** edit `js/wordBank.js` only. Each entry is
-`{ w, pos, def, use }`. No game code needs to change.
+`{ w, pos, def, use }`, where `pos` is `noun`, `verb`, or `adjective` (these feed
+the "Word type" filter). No game code needs to change.
 
 ---
 

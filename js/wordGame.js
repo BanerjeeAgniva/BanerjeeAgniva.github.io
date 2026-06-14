@@ -23,6 +23,7 @@ export function initWordGame() {
   const msgEl     = document.getElementById('gameMsg');
   const refreshEl = document.getElementById('gameRefresh');
   const revealEl  = document.getElementById('gameReveal');
+  const filterEl  = document.getElementById('gameFilter');
   const resultEl  = document.getElementById('gameResult');
   const grStatus  = document.getElementById('grStatus');
   const grTerm    = document.getElementById('grTerm');
@@ -35,18 +36,24 @@ export function initWordGame() {
 
   const REVEAL_AFTER = 3;        // tries required before "Reveal" is allowed
   const validCache = new Map();  // word -> bool (dictionary-API results)
-  let answer = '', meta = null, prevIndex = -1;
+  let answer = '', meta = null;
+  let posFilter = 'all';         // 'all' | 'noun' | 'verb' | 'adjective'
   let row = 0, col = 0, over = false, checking = false;
   let cells = [];          // cells[r][c]
   let rowEls = [];
   const keyEls = {};       // letter -> button
   const keyState = {};     // letter -> 'absent'|'present'|'correct'
 
+  // Words matching the current part-of-speech filter ('all' = the whole bank).
+  function wordPool() {
+    return posFilter === 'all' ? WORDS : WORDS.filter(x => x.pos === posFilter);
+  }
+
   function pick() {
-    let i;
-    do { i = (Math.random() * WORDS.length) | 0; } while (i === prevIndex && WORDS.length > 1);
-    prevIndex = i;
-    meta = WORDS[i];
+    const list = wordPool();
+    let choice;
+    do { choice = list[(Math.random() * list.length) | 0]; } while (choice === meta && list.length > 1);
+    meta = choice;
     answer = meta.w.toLowerCase();
   }
 
@@ -290,6 +297,15 @@ export function initWordGame() {
   refreshEl.addEventListener('click', newGame);
   revealEl.addEventListener('click', reveal);
   grNext.addEventListener('click', newGame);
+
+  // Word-type filter: switch the pool and start a fresh word in that category.
+  filterEl.addEventListener('click', (e) => {
+    const btn = e.target.closest('.gf-btn');
+    if (!btn) return;
+    posFilter = btn.dataset.pos;
+    filterEl.querySelectorAll('.gf-btn').forEach(b => b.classList.toggle('active', b === btn));
+    newGame();
+  });
 
   buildKeyboard();
   newGame();
