@@ -112,13 +112,20 @@ const copyEmailBtn = document.getElementById('copyEmailBtn');
 const toast = document.getElementById('toast');
 let toastTimer;
 
+function showToast(msg, ms = 2200) {
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), ms);
+}
+// expose for other modules (e.g. the word game)
+window.showToast = showToast;
+
 copyEmailBtn.addEventListener('click', (e) => {
   e.preventDefault();
   e.stopPropagation();
   navigator.clipboard.writeText('coolagniva12@gmail.com').then(() => {
-    toast.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+    showToast('Email copied to clipboard ✓');
   });
 });
 
@@ -132,6 +139,7 @@ copyEmailBtn.addEventListener('click', (e) => {
   const posEl     = document.getElementById('gamePos');
   const msgEl     = document.getElementById('gameMsg');
   const refreshEl = document.getElementById('gameRefresh');
+  const revealEl  = document.getElementById('gameReveal');
   const resultEl  = document.getElementById('gameResult');
   const grStatus  = document.getElementById('grStatus');
   const grTerm    = document.getElementById('grTerm');
@@ -181,8 +189,10 @@ copyEmailBtn.addEventListener('click', (e) => {
     { w: 'savvy',    pos: 'noun',      def: 'Practical know-how and shrewdness.',                    use: 'Her marketing savvy doubled our reach.' }
   ];
 
+  const REVEAL_AFTER = 3;        // tries required before "Reveal" is allowed
+  const validCache = new Map();  // word -> bool (dictionary-API results)
   let answer = '', meta = null, prevIndex = -1;
-  let row = 0, col = 0, over = false;
+  let row = 0, col = 0, over = false, checking = false;
   let cells = [];          // cells[r][c]
   let rowEls = [];
   const keyEls = {};       // letter -> button
@@ -275,10 +285,41 @@ copyEmailBtn.addEventListener('click', (e) => {
     if (k) { k.classList.remove('absent', 'present', 'correct'); k.classList.add(state); }
   }
 
-  function submit() {
-    if (over) return;
-    if (col < answer.length) { rowEls[row].classList.add('shake'); flashMsg('Not enough letters'); setTimeout(() => rowEls[row].classList.remove('shake'), 420); return; }
+  function shakeRow(text) {
+    rowEls[row].classList.add('shake');
+    flashMsg(text);
+    setTimeout(() => rowEls[row].classList.remove('shake'), 420);
+  }
+
+  // Validate a guess against the free dictionary API. Answers are always
+  // accepted; results are cached; any network/unexpected failure falls back to
+  // accepting the guess so an outage never blocks play.
+  async function isRealWord(word) {
+    if (word === answer) return true;
+    if (validCache.has(word)) return validCache.get(word);
+    try {
+      const r = await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + word);
+      if (r.status === 404) { validCache.set(word, false); return false; }
+      if (r.status === 200) { validCache.set(word, true); return true; }
+      return true;
+    } catch (e) {
+      return true;
+    }
+  }
+
+  async function submit() {
+    if (over || checking) return;
+    if (col < answer.length) { shakeRow('Not enough letters'); return; }
     const guess = cells[row].map(t => t.textContent.toLowerCase()).join('');
+
+    checking = true;
+    msgEl.textContent = 'Checking…';
+    const ok = await isRealWord(guess);
+    checking = false;
+    if (over) return;                 // state changed mid-check (reveal / new word)
+    if (!ok) { shakeRow('Not a word — try another'); return; }
+    msgEl.textContent = '';
+
     const res = evaluate(guess);
 
     res.forEach((state, i) => {
@@ -294,16 +335,41 @@ copyEmailBtn.addEventListener('click', (e) => {
     row++; col = 0;
 
     if (won) {
-      over = true;
+      over = true; revealEl.disabled = true;
       setTimeout(() => { celebrate(); showResult(true); }, totalDelay);
     } else if (row >= MAX_ROWS) {
-      over = true;
+      over = true; revealEl.disabled = true;
       setTimeout(() => showResult(false), totalDelay);
     }
   }
 
-  function showResult(won) {
-    grStatus.textContent = won ? '🚀 Nailed it!' : 'Out of tries — but here’s a word for you';
+  // Give up: only permitted once the player has made it through 3 tries.
+  function reveal() {
+    if (over) return;
+    if (row < REVEAL_AFTER) {
+      const msg = 'You can only reveal after ' + REVEAL_AFTER + ' tries';
+      (window.showToast || flashMsg)(msg);
+      return;
+    }
+    over = true; revealEl.disabled = true; checking = false;
+    if (row < MAX_ROWS) {                 // spell out the answer in the next row
+      answer.split('').forEach((ch, i) => {
+        const t = cells[row][i];
+        t.textContent = ch;
+        t.classList.add('filled');
+        setTimeout(() => {
+          t.classList.add('reveal-flip');
+          setTimeout(() => { t.classList.add('correct'); paintKey(ch, 'correct'); }, 250);
+        }, i * 120);
+      });
+    }
+    setTimeout(() => showResult(false, true), answer.length * 120 + 420);
+  }
+
+  function showResult(won, revealed) {
+    grStatus.textContent = won ? '🚀 Nailed it!'
+      : revealed ? 'Revealed — one for your vocabulary'
+      : 'Out of tries — but here’s a word for you';
     grTerm.textContent   = meta.w;
     grPos.textContent    = meta.pos;
     grDef.textContent    = meta.def;
@@ -314,7 +380,8 @@ copyEmailBtn.addEventListener('click', (e) => {
 
   function newGame() {
     pick();
-    row = 0; col = 0; over = false;
+    row = 0; col = 0; over = false; checking = false;
+    revealEl.disabled = false;
     for (const k in keyState) delete keyState[k];
     Object.values(keyEls).forEach(k => k.classList.remove('absent', 'present', 'correct'));
     msgEl.textContent = '';
@@ -377,6 +444,7 @@ copyEmailBtn.addEventListener('click', (e) => {
   });
 
   refreshEl.addEventListener('click', newGame);
+  revealEl.addEventListener('click', reveal);
   grNext.addEventListener('click', newGame);
 
   buildKeyboard();

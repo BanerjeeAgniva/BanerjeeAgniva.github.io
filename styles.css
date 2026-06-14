@@ -804,18 +804,21 @@ strong { font-weight: 600; }
   font-style: italic;
   color: var(--accent);
 }
-.game-refresh {
+.game-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.game-refresh, .game-reveal {
   font-size: 0.82rem;
   font-weight: 600;
   padding: 0.42rem 0.95rem;
-  border: 1.5px solid var(--accent);
   border-radius: 8px;
-  color: var(--accent);
   background: transparent;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s, transform 0.2s;
+  transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s, opacity 0.2s;
 }
+.game-refresh { border: 1.5px solid var(--accent); color: var(--accent); }
 .game-refresh:hover { background: var(--accent); color: #fff; transform: translateY(-1px); }
+.game-reveal { border: 1.5px solid var(--text-mute); color: var(--text-mute); }
+.game-reveal:hover { border-color: var(--text-sec); color: var(--text-sec); transform: translateY(-1px); }
+.game-reveal:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
 
 /* Board */
 .game-board {
