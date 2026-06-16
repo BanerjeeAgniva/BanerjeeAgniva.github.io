@@ -29,6 +29,7 @@
         <li><a href="#skills"     class="nav-link">Skills</a></li>
         <li><a href="#music"      class="nav-link">Music</a></li>
         <li><a href="#game"       class="nav-link">Word Game</a></li>
+        <li><a href="#sudoku"     class="nav-link">Sudoku</a></li>
         <li><a href="#contact"    class="nav-link">Contact</a></li>
       </ul>
 
@@ -398,6 +399,60 @@
           <p class="gr-def" id="grDef"></p>
           <p class="gr-use"><span class="gr-use-label">Use it:</span> <span id="grUse"></span></p>
           <button class="btn-primary gr-next" id="grNext" type="button">Play another →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───── SUDOKU ───── -->
+  <section class="section" id="sudoku">
+    <div class="container">
+      <h2 class="section-title reveal">Sudoku</h2>
+      <p class="game-sub reveal">
+        A fresh, hand-generated puzzle every time you load the page — each one
+        guaranteed to have exactly one solution. Pick your difficulty, then fill
+        the grid so every row, column, and 3×3 box holds the digits 1–9.
+        <span class="kbd-inline">Notes</span> toggles pencil marks; arrow keys,
+        number keys, and <span class="kbd-inline">⌫</span> all work too.
+      </p>
+
+      <div class="sudoku-card reveal">
+        <div class="sudoku-head">
+          <div class="game-filter sudoku-diff" id="sudokuDiff">
+            <span class="gf-label">Difficulty</span>
+            <div class="gf-options">
+              <button class="gf-btn active" data-diff="easy"   type="button">Easy</button>
+              <button class="gf-btn"        data-diff="medium" type="button">Medium</button>
+              <button class="gf-btn"        data-diff="hard"   type="button">Hard</button>
+            </div>
+          </div>
+          <button class="game-refresh" id="sudokuNew" type="button">↻ New game</button>
+        </div>
+
+        <div class="sudoku-stats">
+          <span class="sudoku-stat" id="sudokuTimer">0:00</span>
+          <span class="sudoku-stat" id="sudokuMistakes">Mistakes: 0</span>
+        </div>
+
+        <div class="sudoku-board" id="sudokuBoard" role="grid" aria-label="Sudoku grid"></div>
+
+        <div class="sudoku-controls">
+          <div class="sudoku-pad" id="sudokuPad" aria-label="Number pad"></div>
+          <div class="sudoku-tools" id="sudokuTools">
+            <button class="s-tool" data-tool="undo"  type="button"><span>↶</span>Undo</button>
+            <button class="s-tool" data-tool="erase" type="button"><span>⌫</span>Erase</button>
+            <button class="s-tool" data-tool="notes" id="sudokuNotes" type="button"><span>✎</span>Notes <span class="notes-state">Off</span></button>
+            <button class="s-tool" data-tool="hint"  type="button"><span>💡</span>Hint</button>
+          </div>
+        </div>
+
+        <div class="sudoku-result" id="sudokuResult" hidden>
+          <div class="gr-status">🎉 Solved!</div>
+          <p class="sr-line">
+            You cracked a <span class="sr-strong" id="srDiff"></span> puzzle in
+            <span class="sr-strong" id="srTime"></span>.
+          </p>
+          <button class="btn-primary gr-next" id="srAgain" type="button">Play another →</button>
         </div>
       </div>
     </div>

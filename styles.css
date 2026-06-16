@@ -28,6 +28,17 @@
   --game-tile-bd: #c4d0e0;
   --game-key:     #e3eaf4;
   --game-key-tx:  #1a3052;
+  /* Sudoku */
+  --sk-cell:      #ffffff;
+  --sk-grid:      #b9c6d8;
+  --sk-grid-bold: #6b7e98;
+  --sk-given:     #0d1b2a;
+  --sk-guess:     #1a6abf;
+  --sk-peer:      #e9f0fa;
+  --sk-same:      #cfe1f6;
+  --sk-sel:       #b6d4f5;
+  --sk-error:     #d64561;
+  --sk-error-bg:  #fbe3e8;
 }
 
 [data-theme="dark"] {
@@ -56,6 +67,17 @@
   --game-tile-bd: #2a3f5e;
   --game-key:     #1a2d4a;
   --game-key-tx:  #ccd6f6;
+  /* Sudoku */
+  --sk-cell:      #0e1f3a;
+  --sk-grid:      #25395a;
+  --sk-grid-bold: #5c7398;
+  --sk-given:     #ccd6f6;
+  --sk-guess:     #6ab5f0;
+  --sk-peer:      #142b4d;
+  --sk-same:      #1d3a63;
+  --sk-sel:       #27507f;
+  --sk-error:     #ff6b85;
+  --sk-error-bg:  #3a1a26;
 }
 
 /* ═══════════════════════════════════════
@@ -1043,6 +1065,213 @@ strong { font-weight: 600; }
 @media (max-width: 480px) {
   .game-card { padding: 1.2rem 0.9rem 1.4rem; }
   .key { height: 44px; }
+}
+
+/* ═══════════════════════════════════════
+   SUDOKU
+═══════════════════════════════════════ */
+.sudoku-card {
+  max-width: 560px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg);
+  padding: 1.6rem 1.5rem 1.8rem;
+}
+.sudoku-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.sudoku-diff { margin-bottom: 0; }
+
+.sudoku-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.sudoku-stat {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-sec);
+}
+#sudokuTimer { color: var(--accent); }
+
+/* Board */
+.sudoku-board {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 0;
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto;
+  aspect-ratio: 1 / 1;
+  border: 2.5px solid var(--sk-grid-bold);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--sk-grid);
+  touch-action: manipulation;
+}
+.s-cell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0.5px solid var(--sk-grid);
+  background: var(--sk-cell);
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: clamp(1rem, 5vw, 1.6rem);
+  font-weight: 600;
+  color: var(--sk-guess);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.12s;
+  user-select: none;
+}
+/* Bold rules between the 3×3 boxes */
+.s-cell:nth-child(3n) { border-right: 1.5px solid var(--sk-grid-bold); }
+.s-cell:nth-child(9n) { border-right: 0; }
+.sudoku-board > .s-cell:nth-child(n+19):nth-child(-n+27),
+.sudoku-board > .s-cell:nth-child(n+46):nth-child(-n+54) {
+  border-bottom: 1.5px solid var(--sk-grid-bold);
+}
+.s-cell.given { color: var(--sk-given); font-weight: 700; cursor: default; }
+.s-cell.peer  { background: var(--sk-peer); }
+.s-cell.same  { background: var(--sk-same); }
+.s-cell.selected { background: var(--sk-sel); }
+.s-cell.error { color: var(--sk-error); }
+.s-cell.error.selected { background: var(--sk-error-bg); }
+.s-cell.conflict::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 0 2px var(--sk-error);
+  pointer-events: none;
+}
+.s-val { line-height: 1; }
+.s-cell:not(.has-val) .s-val { display: none; }
+
+/* Pencil marks — a 3×3 mini grid inside the cell */
+.s-notes {
+  position: absolute;
+  inset: 2px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(0.42rem, 1.7vw, 0.62rem);
+  font-weight: 500;
+  color: var(--text-mute);
+  pointer-events: none;
+}
+.s-notes > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.s-cell.has-val .s-notes { display: none; }
+
+/* Controls */
+.sudoku-controls {
+  margin-top: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  align-items: center;
+}
+.sudoku-pad {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 5px;
+  width: 100%;
+  max-width: 460px;
+}
+.s-pad-key {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: clamp(1rem, 4.5vw, 1.5rem);
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--game-key);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.12s, transform 0.08s, opacity 0.12s;
+}
+.s-pad-key:hover { background: var(--accent); color: #fff; }
+.s-pad-key:active { transform: scale(0.94); }
+.s-pad-key.done { opacity: 0.32; pointer-events: none; }
+.s-pad-count {
+  position: absolute;
+  top: 3px;
+  right: 5px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--text-mute);
+}
+.s-pad-key:hover .s-pad-count { color: rgba(255, 255, 255, 0.85); }
+
+.sudoku-tools {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+.s-tool {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.45rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-sec);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.s-tool > span { font-size: 0.95em; }
+.s-tool:hover { color: var(--accent); border-color: var(--accent); }
+.s-tool.active {
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.s-tool.active .notes-state { opacity: 0.85; }
+.notes-state { font-weight: 700; }
+
+/* Result panel */
+.sudoku-result {
+  margin-top: 1.4rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  animation: grIn 0.4s ease;
+}
+.sr-line {
+  font-size: 0.97rem;
+  color: var(--text-sec);
+  margin: 0.4rem auto 1.3rem;
+  line-height: 1.7;
+}
+.sr-strong { color: var(--text); font-weight: 700; }
+
+@media (max-width: 480px) {
+  .sudoku-card { padding: 1.2rem 0.9rem 1.4rem; }
+  .sudoku-pad { gap: 4px; }
 }
 
 /* ═══════════════════════════════════════

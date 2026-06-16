@@ -14,6 +14,7 @@ import { initNavigation }   from './navigation.js';
 import { initScrollReveal } from './scrollReveal.js';
 import { initCopyEmail }    from './toast.js';
 import { initWordGame }     from './wordGame.js';
+import { initSudoku }       from './sudoku.js';
 import { initBackground }   from './background.js';
 
 initTheme();          // light/dark toggle (+ Spotify embed sync)
@@ -21,4 +22,5 @@ initNavigation();     // hamburger menu, navbar shadow, active link, progress ba
 initScrollReveal();   // fade-in elements as they enter the viewport
 initCopyEmail();      // "copy email" button + toast notifications
 initWordGame();       // the vocabulary Wordle
+initSudoku();         // the Sudoku game (unique-solution puzzle per load)
 initBackground();     // animated canvas behind the page

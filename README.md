@@ -22,6 +22,7 @@ modules. GitHub Pages serves the files exactly as they are in this repo.
 │   ├── toast.js        # Bottom pop-up notification + "copy email" button
 │   ├── wordGame.js     # The vocabulary Wordle game
 │   ├── wordBank.js     # The word list the game draws from (pure data)
+│   ├── sudoku.js       # The Sudoku game (unique-solution puzzle per load)
 │   └── background.js   # The animated canvas behind the whole page
 ├── agniva_wells.pdf    # Résumé (downloaded by the Resume buttons)
 ├── myphoto.jpg         # Hero photo
