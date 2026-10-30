@@ -91,7 +91,7 @@ html {
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.7;
@@ -303,7 +303,7 @@ strong { font-weight: 600; }
 }
 
 .hero-name {
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: 'Newsreader', Georgia, serif;
   font-size: clamp(3rem, 6vw, 4.8rem);
   font-weight: 600;
   line-height: 1.04;
@@ -458,7 +458,7 @@ strong { font-weight: 600; }
 .section:nth-child(odd) { background: var(--section-alt); }
 
 .section-title {
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: 'Newsreader', Georgia, serif;
   font-size: clamp(1.7rem, 3vw, 2.4rem);
   font-weight: 600;
   letter-spacing: -0.01em;
@@ -527,7 +527,7 @@ strong { font-weight: 600; }
 }
 
 .stat-num {
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: 'Newsreader', Georgia, serif;
   font-size: 2.2rem;
   font-weight: 600;
   color: var(--accent);
@@ -620,7 +620,7 @@ strong { font-weight: 600; }
 }
 
 .tc-company {
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: 'Newsreader', Georgia, serif;
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--text);
@@ -712,7 +712,7 @@ strong { font-weight: 600; }
   margin-bottom: 0.6rem;
 }
 .work-title {
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: 'Newsreader', Georgia, serif;
   font-size: 1.2rem;
   font-weight: 600;
   color: var(--text);
@@ -805,7 +805,7 @@ strong { font-weight: 600; }
   border-radius: 20px; padding: 2px 9px;
 }
 .sg-dkind.pinned { color: var(--accent); border-color: var(--accent); }
-.sg-dname { font-family: 'Fraunces', Georgia, serif; font-size: 1.1rem; font-weight: 600; color: var(--text); }
+.sg-dname { font-family: 'Newsreader', Georgia, serif; font-size: 1.1rem; font-weight: 600; color: var(--text); }
 .sg-dbody { margin-top: 0.7rem; }
 .sg-ach { font-size: 0.88rem; color: var(--text-sec); line-height: 1.65; margin: 0.5rem 0; }
 .sg-ach b { color: var(--text); font-weight: 600; }
@@ -994,7 +994,7 @@ strong { font-weight: 600; }
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: 'Newsreader', Georgia, serif;
   font-weight: 700;
   font-size: clamp(1.1rem, 4vw, 1.6rem);
   text-transform: uppercase;
@@ -1091,7 +1091,7 @@ strong { font-weight: 600; }
   flex-wrap: wrap;
 }
 .gr-term {
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: 'Newsreader', Georgia, serif;
   font-size: 1.8rem;
   font-weight: 700;
   color: var(--text);
@@ -1217,7 +1217,7 @@ strong { font-weight: 600; }
   justify-content: center;
   border: 0.5px solid var(--sk-grid);
   background: var(--sk-cell);
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: 'Newsreader', Georgia, serif;
   font-size: clamp(1rem, 5vw, 1.6rem);
   font-weight: 600;
   color: var(--sk-guess);
@@ -1290,7 +1290,7 @@ strong { font-weight: 600; }
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: 'Newsreader', Georgia, serif;
   font-size: clamp(1rem, 4.5vw, 1.5rem);
   font-weight: 600;
   color: var(--accent);
